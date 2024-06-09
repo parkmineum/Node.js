@@ -1,0 +1,94 @@
+
+
+paths:
+  /store/signin:
+    post:
+      tags : 
+        - Add a new Store 
+      summary: 특정 가게 추가 
+      description: Add a new store to the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: My Store
+                  description: The name of the store.
+                content:
+                  type: string
+                  example: A great place for shopping.
+                  description: A description of the store.
+                phone:
+                  type: string
+                  example: 123-456-7890
+                  description: The phone number of the store.
+                addr:
+                  type: string
+                  example: 123 Main St.
+                  description: The address of the store.
+                specAddr:
+                  type: string
+                  example: Suite 100
+                  description: Specific address details of the store.
+                  responses:
+            '200':
+              description: 가게 추가에 성공하였습니다. 
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: SUCCESS
+                      data:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: My Store
+                          phone:
+                            type: string
+                            example: 123-456-7890
+                          content:
+                            type: string
+                            example: A great place for shopping.
+              '400':
+                description: 잘못된 요청
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 400
+                    isSuccess:
+                      type: boolean
+                      example: false
+                    code:
+                      type: integer
+                      example: COMMON001
+                    message:
+                      type: string
+                      example: 잘못된 요청입니다
+
+              '500':
+                description: 서버 에러
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 500
+                    isSuccess:
+                      type: boolean
+                      example: false
+                    code:
+                      type: integer
+                      example: COMMON000
+                    message:
+                      type: string
+                      example: 서버 에러, 관리자에게 문의 바랍니다.
