@@ -1,0 +1,104 @@
+
+paths:
+  /user/missions/{userId}:
+    get:
+      tags:
+        - User
+      summary: 진행중인 미션 목록 조회 
+      parameters:
+        - name: userId
+          in: path
+          schema:y
+            type: integer
+          required: true
+        - name: missionId
+          in: query
+          required: false
+          schema:
+            properties:
+              missionId:
+                type: integer
+        - name: paging
+          in: query
+          required: true
+          schema:
+            properties:
+              size:
+                type: integer
+      responses:
+        '200':
+          description: 미션 조회 성공
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 200
+              isSuccess:
+                type: boolean
+                example: true
+              code:
+                type: integer
+                example: 2000
+              message:
+                type: string
+                example: "success!"
+              data:
+                type: array
+                example: {
+                  "missionData": [
+                    {
+                      "user_name":"사용자 이름",
+                      "userId": "사용자 ID",
+                      "storeId": "가게 ID",
+                      "content": "상품 가격",
+                      "date": "남은 기간",
+                      "point": "포인트"
+                    },
+                    {
+                      "user_name":"사용자 이름",
+                      "userId": "사용자 ID",
+                      "storeId": "가게 ID",
+                      "content": "상품 가격",
+                      "date": "남은 기간",
+                      "point": "포인트"
+                    }
+                  ],
+                  "cursorId": 1
+                }
+                
+        '400':
+          description: 잘못된 요청
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 400
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON001
+              message:
+                type: string
+                example: 잘못된 요청입니다
+
+        '500':
+          description: 서버 에러
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 500
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON000
+              message:
+                type: string
+                example: 서버 에러, 관리자에게 문의 바랍니다.
