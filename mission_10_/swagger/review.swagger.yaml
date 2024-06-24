@@ -1,0 +1,92 @@
+# review.swagger.yaml
+
+paths:
+  /store/review:
+    post:
+      tags:
+        - Store Review
+      summary: 리뷰추가
+      parameters:
+      - name: review
+        in: body
+        required: true
+        schema:
+          properties:
+            user_id:
+              type: integer
+              description: 사용자 ID
+              example: 1
+            store_id:
+              type: integer
+              description: 가게 ID
+              example: 1
+            content:
+              type: string
+              description: 주소
+              example: xx시 xx구 xx동
+            grade:
+              type: number
+              format: float
+              description: 평점
+              example: 3.5
+          responses:
+            '200':
+              description: 리뷰 추가에 성공하였습니다.
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  isSuccess:
+                    type: boolean
+                    example: true
+                  code:
+                    type: integer
+                    example: 2000
+                  message:
+                    type: string
+                    example: "success!"
+                  data:
+                    type: object
+                    example: {
+                      "store_name": "Nodregon store",
+                      "content": "맛있습니다!!",
+                      "grade": 4.5
+                    }
+                    
+            '400':
+                description: 잘못된 요청
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 400
+                    isSuccess:
+                      type: boolean
+                      example: false
+                    code:
+                      type: integer
+                      example: COMMON001
+                    message:
+                      type: string
+                      example: 잘못된 요청입니다
+
+            '500':
+                description: 서버 에러
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 500
+                    isSuccess:
+                      type: boolean
+                      example: false
+                    code:
+                      type: integer
+                      example: COMMON000
+                    message:
+                      type: string
+                      example: 서버 에러, 관리자에게 문의 바랍니다.
